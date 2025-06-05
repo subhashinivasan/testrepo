@@ -1,0 +1,70 @@
+/* Basic styles */
+body {
+    font-family: sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid; /* Color will be set by theme */
+}
+
+main {
+    padding: 1em;
+}
+
+button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+/* Light Theme (default) */
+:root {
+    --background-color-light: #ffffff;
+    --text-color-light: #333333;
+    --header-border-color-light: #eeeeee;
+    --button-bg-color-light: #efefef;
+    --button-text-color-light: #333333;
+}
+
+body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+header {
+    border-bottom-color: var(--header-border-color-light);
+}
+
+button {
+    background-color: var(--button-bg-color-light);
+    color: var(--button-text-color-light);
+    border: 1px solid var(--header-border-color-light); /* Using header border for consistency */
+}
+
+/* Dark Theme */
+.dark-theme {
+    --background-color-dark: #333333;
+    --text-color-dark: #ffffff;
+    --header-border-color-dark: #444444;
+    --button-bg-color-dark: #555555;
+    --button-text-color-dark: #ffffff;
+}
+
+.dark-theme {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+.dark-theme header {
+    border-bottom-color: var(--header-border-color-dark);
+}
+
+.dark-theme button {
+    background-color: var(--button-bg-color-dark);
+    color: var(--button-text-color-dark);
+    border: 1px solid var(--header-border-color-dark);
+}
