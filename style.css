@@ -1,0 +1,238 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    transition: background-color 0.5s ease; /* Smooth background transition if we ever change it */
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh;
+    padding-top: 40px; /* Add some padding at the top */
+}
+
+.todo-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px; /* Max width of the container */
+    text-align: center;
+    transform: scale(0.95); /* Initial state for a subtle pop-in effect */
+    animation: popIn 0.5s ease-out forwards;
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-between; /* Distribute space */
+    align-items: center; /* Align items vertically */
+    margin-bottom: 25px;
+    gap: 10px; /* Add gap between items */
+}
+
+#task-input {
+    flex-grow: 1; /* Allow input to take available space */
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+#task-input:focus, #task-due-date:focus {
+    outline: none;
+    border-color: #77b5fe;
+    box-shadow: 0 0 0 3px rgba(119, 181, 254, 0.4); /* Softer focus glow */
+}
+
+#task-due-date {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+#add-task-btn {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+}
+
+#add-task-btn:hover {
+    background-color: #4cae4c;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+#add-task-btn:active {
+    transform: translateY(0); /* Press down effect */
+}
+
+#todo-list {
+    list-style: none;
+    padding: 0;
+    text-align: left; /* Align list items to the left */
+}
+
+#todo-list li {
+    background-color: #e9ecef;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0; /* Start transparent for fade-in effect */
+    transform: translateX(-20px); /* Start slightly to the left for slide-in effect */
+    animation: listItemFadeIn 0.4s ease-out forwards;
+}
+
+/* Stagger animations for list items */
+#todo-list li:nth-child(1) { animation-delay: 0.05s; }
+#todo-list li:nth-child(2) { animation-delay: 0.1s; }
+#todo-list li:nth-child(3) { animation-delay: 0.15s; }
+/* Add more if needed, or handle dynamically with JS if list is very long */
+
+@keyframes listItemFadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#todo-list li:hover {
+    background-color: #dfe6e9; /* Lighter hover effect */
+}
+
+#todo-list li.completed {
+    background-color: #d4edda;
+    text-decoration: line-through;
+    color: #6c757d;
+    opacity: 0.7; /* Slightly fade out completed tasks */
+}
+
+#todo-list li.completed span {
+    text-decoration: line-through;
+}
+
+
+#todo-list li .task-actions button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px; /* Space between buttons if multiple */
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#todo-list li .task-actions button:hover {
+    transform: scale(1.1); /* Slightly enlarge buttons on hover */
+}
+
+#todo-list li .task-actions button.complete-btn {
+    background-color: #28a745;
+}
+#todo-list li .task-actions button.complete-btn:hover {
+    background-color: #218838;
+    transform: scale(1.1); /* Ensure hover effect is consistent */
+}
+
+#todo-list li .task-actions button.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1); /* Ensure hover effect is consistent */
+}
+
+/* Add styles for task removal animation */
+#todo-list li.removing {
+    animation: listItemFadeOut 0.4s ease-out forwards;
+}
+
+@keyframes listItemFadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px); /* Slide out to the right */
+    }
+}
+
+
+.calendar-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    border-top: 2px solid #77b5fe; /* Accent color top border */
+}
+
+/* Flatpickr specific styling to match the theme */
+.flatpickr-calendar {
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange, .flatpickr-day.selected.inRange, .flatpickr-day.startRange.inRange, .flatpickr-day.endRange.inRange, .flatpickr-day.selected:focus, .flatpickr-day.startRange:focus, .flatpickr-day.endRange:focus, .flatpickr-day.selected:hover, .flatpickr-day.startRange:hover, .flatpickr-day.endRange:hover, .flatpickr-day.selected.prevMonthDay, .flatpickr-day.startRange.prevMonthDay, .flatpickr-day.endRange.prevMonthDay, .flatpickr-day.selected.nextMonthDay, .flatpickr-day.startRange.nextMonthDay, .flatpickr-day.endRange.nextMonthDay {
+    background: #5cb85c; /* Match add task button color */
+    border-color: #5cb85c;
+}
+.flatpickr-day.today {
+    border-color: #77b5fe; /* Accent color for today */
+}
+.flatpickr-day.today:hover {
+    background: #77b5fe;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .input-section {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+    }
+
+    #task-input,
+    #task-due-date,
+    #add-task-btn {
+        width: 100%; /* Full width for stacked items */
+        margin-bottom: 10px; /* Add some space between stacked items */
+    }
+
+    #add-task-btn {
+        margin-bottom: 0; /* No margin for the last button */
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}
